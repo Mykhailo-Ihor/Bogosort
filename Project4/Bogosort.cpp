@@ -1,6 +1,7 @@
 #include <iostream>
 #include <random>
 #include <Windows.h>
+#include <chrono>
 using namespace std;
 bool is_sorted(int arr[], int size) 
 {
@@ -44,14 +45,16 @@ int main()
         cout << arr[i] << " ";
     }
     cout << endl;
-
-    cout << "Кількість ітерацій: " << bogosort(arr, size) << endl;
-
+    auto start_time = chrono::steady_clock::now();
+    int counter = bogosort(arr, size);
+    auto end_time = chrono::steady_clock::now();
     cout << "Масив після сортування: ";
     for (int i = 0; i < size; ++i) {
         cout << arr[i] << " ";
     }
     cout << endl;
-
+    chrono::duration<double> elapsed_time = end_time - start_time;
+    cout << "Час виконання програми: " << elapsed_time.count() << " секунд" << std::endl;
+    cout << "Кількість ітерацій: " << counter;
     return 0;
 }
